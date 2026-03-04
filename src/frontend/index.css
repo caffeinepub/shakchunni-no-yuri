@@ -1,0 +1,330 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Font Faces ─────────────────────────────────────────── */
+@font-face {
+  font-family: "Fraunces";
+  src: url("/assets/fonts/Fraunces.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Crimson Pro";
+  src: url("/assets/fonts/CrimsonPro.woff2") format("woff2");
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("/assets/fonts/InstrumentSerif.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Design Tokens ─────────────────────────────────────── */
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* Dark atmospheric palette — deep indigo / jade / crimson / gold */
+    --background:        0.10 0.025 270;
+    --foreground:        0.92 0.03  85;
+
+    --card:              0.13 0.035 270;
+    --card-foreground:   0.92 0.03  85;
+
+    --popover:           0.16 0.04  270;
+    --popover-foreground: 0.92 0.03 85;
+
+    --primary:           0.72 0.16  155;   /* jade teal */
+    --primary-foreground: 0.10 0.02 270;
+
+    --secondary:         0.18 0.04  270;
+    --secondary-foreground: 0.88 0.04 85;
+
+    --muted:             0.18 0.03  270;
+    --muted-foreground:  0.60 0.04  270;
+
+    --accent:            0.62 0.20  25;    /* crimson-rose */
+    --accent-foreground: 0.97 0.01  85;
+
+    --destructive:       0.55 0.22  20;
+    --destructive-foreground: 0.97 0.01 85;
+
+    --border:            0.28 0.06  270;
+    --input:             0.22 0.05  270;
+    --ring:              0.72 0.16  155;
+
+    /* Custom tokens */
+    --jade:    0.72 0.16  155;
+    --gold:    0.82 0.14   85;
+    --crimson: 0.60 0.22   25;
+    --indigo:  0.14 0.04  270;
+    --mist:    0.88 0.03  200;
+
+    --chart-1: 0.72 0.16  155;
+    --chart-2: 0.60 0.22   25;
+    --chart-3: 0.82 0.14   85;
+    --chart-4: 0.55 0.18  270;
+    --chart-5: 0.65 0.14  200;
+
+    --sidebar: 0.12 0.03  270;
+    --sidebar-foreground: 0.92 0.03 85;
+    --sidebar-primary: 0.72 0.16 155;
+    --sidebar-primary-foreground: 0.10 0.02 270;
+    --sidebar-accent: 0.18 0.04 270;
+    --sidebar-accent-foreground: 0.88 0.04 85;
+    --sidebar-border: 0.28 0.06 270;
+    --sidebar-ring: 0.72 0.16 155;
+  }
+
+  /* Force dark mode globally */
+  html {
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Crimson Pro", Georgia, serif;
+    min-height: 100vh;
+  }
+}
+
+/* ─── Keyframe Animations ───────────────────────────────── */
+@keyframes float-petal {
+  0% {
+    transform: translateY(100vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-20px) translateX(60px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer {
+  0%, 100% {
+    opacity: 0.5;
+    filter: blur(0px);
+  }
+  50% {
+    opacity: 1;
+    filter: blur(1px);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 12px oklch(0.72 0.16 155 / 0.25);
+  }
+  50% {
+    box-shadow: 0 0 28px oklch(0.72 0.16 155 / 0.55), 0 0 60px oklch(0.60 0.22 25 / 0.15);
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+/* ─── Utility Classes ───────────────────────────────────── */
+@layer utilities {
+  .font-display {
+    font-family: "Fraunces", Georgia, serif;
+  }
+
+  .font-serif {
+    font-family: "Instrument Serif", "Crimson Pro", Georgia, serif;
+  }
+
+  .font-body {
+    font-family: "Crimson Pro", Georgia, serif;
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out both;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 4s ease-in-out infinite;
+  }
+
+  .animate-float-slow {
+    animation: float-slow 6s ease-in-out infinite;
+  }
+
+  .text-jade {
+    color: oklch(var(--jade));
+  }
+
+  .text-gold {
+    color: oklch(var(--gold));
+  }
+
+  .text-crimson {
+    color: oklch(var(--crimson));
+  }
+
+  .text-mist {
+    color: oklch(var(--mist));
+  }
+
+  .bg-jade {
+    background-color: oklch(var(--jade));
+  }
+
+  .bg-indigo-deep {
+    background-color: oklch(var(--indigo));
+  }
+
+  .border-jade {
+    border-color: oklch(var(--jade));
+  }
+
+  .border-gold {
+    border-color: oklch(var(--gold));
+  }
+
+  .border-crimson {
+    border-color: oklch(var(--crimson));
+  }
+
+  .card-glow-jade {
+    box-shadow: 0 0 0 1px oklch(0.72 0.16 155 / 0.3),
+                0 4px 24px oklch(0.72 0.16 155 / 0.12),
+                0 0 60px oklch(0.72 0.16 155 / 0.06);
+  }
+
+  .card-glow-crimson {
+    box-shadow: 0 0 0 1px oklch(0.60 0.22 25 / 0.3),
+                0 4px 24px oklch(0.60 0.22 25 / 0.12),
+                0 0 60px oklch(0.60 0.22 25 / 0.06);
+  }
+
+  .card-glow-gold {
+    box-shadow: 0 0 0 1px oklch(0.82 0.14 85 / 0.3),
+                0 4px 24px oklch(0.82 0.14 85 / 0.12);
+  }
+
+  .noise-texture {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  }
+
+  .petal-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .petal {
+    position: absolute;
+    bottom: -20px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50% 0 50% 0;
+    background: oklch(0.95 0.02 200 / 0.4);
+    animation: float-petal linear infinite;
+  }
+
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      oklch(0.72 0.16 155 / 0.4),
+      oklch(0.60 0.22 25 / 0.4),
+      transparent
+    );
+    margin: 3rem 0;
+  }
+
+  .hero-gradient-yuri {
+    background: radial-gradient(ellipse at 30% 0%, oklch(0.22 0.08 270 / 0.8) 0%, oklch(0.10 0.025 270) 60%),
+                radial-gradient(ellipse at 80% 80%, oklch(0.18 0.06 155 / 0.4) 0%, transparent 60%);
+  }
+
+  .hero-gradient-kamala {
+    background: radial-gradient(ellipse at 70% 0%, oklch(0.22 0.07 25 / 0.6) 0%, oklch(0.10 0.025 270) 60%),
+                radial-gradient(ellipse at 20% 80%, oklch(0.18 0.06 85 / 0.3) 0%, transparent 60%);
+  }
+
+  .hero-gradient-home {
+    background:
+      radial-gradient(ellipse at 20% 20%, oklch(0.22 0.08 270 / 0.7) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, oklch(0.20 0.07 25 / 0.5) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, oklch(0.16 0.05 155 / 0.4) 0%, transparent 50%),
+      oklch(0.10 0.025 270);
+  }
+
+  .quote-card {
+    position: relative;
+    padding: 1.5rem 2rem;
+    background: oklch(0.13 0.035 270 / 0.8);
+    border-left: 2px solid oklch(0.72 0.16 155 / 0.6);
+    backdrop-filter: blur(8px);
+  }
+
+  .quote-card::before {
+    content: '"';
+    position: absolute;
+    top: -0.5rem;
+    left: 1.25rem;
+    font-family: "Fraunces", serif;
+    font-size: 4rem;
+    line-height: 1;
+    color: oklch(0.72 0.16 155 / 0.3);
+    pointer-events: none;
+  }
+
+  .quote-card-crimson {
+    border-left-color: oklch(0.60 0.22 25 / 0.6);
+  }
+
+  .quote-card-crimson::before {
+    color: oklch(0.60 0.22 25 / 0.3);
+  }
+
+  .profile-label {
+    font-family: "Fraunces", serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: oklch(0.72 0.16 155);
+  }
+
+  .profile-label-crimson {
+    color: oklch(0.60 0.22 25);
+  }
+}
